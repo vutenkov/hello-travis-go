@@ -1,0 +1,36 @@
+language: go
+
+env:
+  - GO111MODULE=on
+
+go:
+  - 1.11.x
+
+git:
+  depth: 1
+
+notifications:
+  email: false
+
+before_install:
+  - export TZ=Europe/Moscow
+
+script:
+  - make test
+
+before_deploy:
+  - make pack
+  - sha256sum *.tgz > sha256sums.txt
+
+deploy:
+  provider: releases
+  api_key: ${GITHUB_TOKEN}
+  file:
+    - hello-$(TRAVIS_TAG)-darwin-amd64.tgz
+    - hello-$(TRAVIS_TAG)-linux-amd64.tgz
+    - hello-$(TRAVIS_TAG)-windows-amd64.tgz
+  skip_cleanup: true
+  overwrite: true
+  on:
+    repo: vutenkov/hello-travis-go
+    tags: true
