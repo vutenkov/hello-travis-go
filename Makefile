@@ -5,7 +5,7 @@ build:
 .PHONY: build
 
 test:
-	go test
+	go test -v
 .PHONY: test
 
 lint:
