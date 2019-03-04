@@ -3,7 +3,7 @@ dist: xenial
 language: go
 
 env:
-  - GO111MODULE=on
+  - GO111MODULE=on TZ=Europe/Moscow
 
 go:
   - 1.12.x
@@ -18,7 +18,6 @@ before_script:
   - curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $(go env GOPATH)/bin v1.15.0
 
 script:
-  - export TZ=Europe/Moscow
   - make lint test
 
 before_deploy:
