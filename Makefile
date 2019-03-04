@@ -19,4 +19,5 @@ pack:
 	tar cvzf hello-$(TRAVIS_TAG)-linux-amd64.tgz hello
 	GOOS=windows GOARCH=amd64 go build -ldflags '-w -s' -o hello.exe
 	tar cvzf hello-$(TRAVIS_TAG)-windows-amd64.tgz hello.exe
+	sha256sum *.tgz > sha256sums.txt
 .PHONY: pack
